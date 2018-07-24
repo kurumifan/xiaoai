@@ -12,6 +12,8 @@ import 'kane_page.dart';
 
 import 'package:flutter/services.dart';
 
+import 'Pages/study.dart';
+
 int yanderePage = 1 ;
 
 ///yandere
@@ -24,9 +26,9 @@ List<String> yandere11filesize;
 
 ///Danbooru
 final String danbooruxml = "https://danbooru.donmai.us/posts.xml";
-List<String> danboorupreviw;
+List<String> danboorupreview;
 final String danbooruxmls = "https://safebooru.donmai.us/posts.xml";
-List<String> danboorupreviws;
+List<String> safeboorupreview;
 
 final String testxml = 'https://yande.re/post.xml?tags=tokisaki_kurumi';
 List<String> testlist;
@@ -90,7 +92,7 @@ class _HomePageState extends State<HomePage> {
     );
     setState(() {
       var keys3 = xml.parse(response3.body).findAllElements('preview-file-url');
-      danboorupreviw = keys3.map((node) {
+      danboorupreview = keys3.map((node) {
         return node.text;
       }).toList();
     });
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage> {
     );
     setState(() {
       var keys3 = xml.parse(response3.body).findAllElements('preview-file-url');
-      danboorupreviws = keys3.map((node) {
+      safeboorupreview = keys3.map((node) {
         return node.text;
       }).toList();
     });
@@ -116,19 +118,30 @@ class _HomePageState extends State<HomePage> {
       new NavigationIconView(
         icon: const Icon(Icons.image),
         title: 'yandere',
-        color: Colors.pink,
+        color: Colors.redAccent,
       ),
       new NavigationIconView(
         icon: const Icon(Icons.image),
         title: 'Danbooru',
         color: Colors.blue,
       ),
+      new NavigationIconView(
+        icon: const Icon(Icons.image),
+        title: '学习',
+        color: Colors.pinkAccent,
+      ),
+      new NavigationIconView(
+        icon: const Icon(Icons.image),
+        title: '我的',
+        color: Colors.orangeAccent,
+      ),
     ];
-    List<String> _titles = ['yande.re', 'danbooru.donmai.us', '个人信息'];
+    List<String> _titles = ['yande.re', 'danbooru.donmai.us', '学习页面','个人信息'];
     List<Color> _colors = [
       Colors.redAccent,
       Colors.blue,
-      Colors.redAccent,
+      Colors.pinkAccent,
+      Colors.orangeAccent,
     ];
 
     final BottomNavigationBar botNavBar = new BottomNavigationBar(
@@ -151,40 +164,41 @@ class _HomePageState extends State<HomePage> {
         preferredSize: new Size(10.0, 50.0),
         child: new AppBar(
           ///column按钮
-          leading: IconButton(
-            icon: Icon(Icons.view_column),
-            onPressed: () {
-              showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      height: 60.0,
-                      child: new Row(children: <Widget>[
-                        Expanded(
-                          child: new IconButton(
-                            icon: Icon(Icons.view_week),
-                            onPressed: () {
-                              setState(() {
-                                setcount < 10 ? setcount++ : setcount;
-                              });
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: new IconButton(
-                            icon: Icon(Icons.pause),
-                            onPressed: () {
-                              setState(() {
-                                setcount > 2 ? setcount-- : setcount;
-                              });
-                            },
-                          ),
-                        ),
-                      ]),
-                    );
-                  });
-            },
-          ),
+          // leading: IconButton(
+          //   icon: Icon(Icons.view_column),
+          //   onPressed: () {
+          //     showModalBottomSheet<void>(
+          //         context: context,
+          //         builder: (BuildContext context) {
+          //           return Container(
+          //             height: 60.0,
+          //             child: new Row(children: <Widget>[
+          //               Expanded(
+          //                 child: new IconButton(
+          //                   icon: Icon(Icons.view_week),
+          //                   onPressed: () {
+          //                     setState(() {
+          //                       setcount < 10 ? setcount++ : setcount;
+          //                     });
+          //                   },
+          //                 ),
+          //               ),
+          //               Expanded(
+          //                 child: new IconButton(
+          //                   icon: Icon(Icons.pause),
+          //                   onPressed: () {
+          //                     setState(() {
+          //                       setcount > 2 ? setcount-- : setcount;
+          //                     });
+          //                   },
+          //                 ),
+          //               ),
+          //             ]),
+          //           );
+          //         });
+          //   },
+          // ),
+
           actions: <Widget>[
             /// 支持 按钮
             IconButton(
@@ -214,6 +228,9 @@ class _HomePageState extends State<HomePage> {
               return aa(context);
               break;
             case 2:
+              return study(context);
+              break;
+            case 3:
               return myinfo(context);
               break;
             default:
