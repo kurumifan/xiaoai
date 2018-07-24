@@ -56,7 +56,9 @@ class _NextPageState extends State<NextPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(actions: <Widget>[
+        
+      ],),
       body: Center(
         child: Text(widget.value,style: TextStyle(fontSize: 35.0,color: Colors.orange),),
       ),

@@ -12,7 +12,7 @@ class Aa extends StatefulWidget {
 class _AaState extends State<Aa> {
   @override
   Widget build(BuildContext context) {
-    return danboorupreviws == null
+    return safeboorupreview == null
         ? new Scaffold(
             body: new Center(child: new CircularProgressIndicator()),
           )
@@ -25,11 +25,11 @@ class _AaState extends State<Aa> {
                   crossAxisSpacing: 4.0,
                   padding: new EdgeInsets.all(4.0),
                   children: new List<Widget>.generate(
-                    danboorupreviws.length,
+                    safeboorupreview.length,
                     (a) => new GestureDetector(
                           onTap: () {},
                           child: new CachedNetworkImage(
-                            imageUrl: danboorupreviws[a],
+                            imageUrl: safeboorupreview[a],
                             placeholder: Image.asset('img/aaloading.jpg'),
                             errorWidget: new Icon(Icons.error),
                             // fit: BoxFit.cover,
@@ -46,7 +46,7 @@ Widget aa(covariant) {
   //   ),
   // );
 
-  return danboorupreviw == null
+  return danboorupreview == null
       ? new Scaffold(
           body: new Center(child: new CircularProgressIndicator()),
         )
@@ -58,14 +58,14 @@ Widget aa(covariant) {
               crossAxisSpacing: 4.0,
               padding: new EdgeInsets.all(4.0),
               children: new List<Widget>.generate(
-                danboorupreviw.length,
+                danboorupreview.length,
                 (a) => new GestureDetector(
                       onTap: () {
                         Navigator.of(covariant).push(new MaterialPageRoute(
                       builder: (BuildContext context) => new Aa()));
                       },
                       child: new CachedNetworkImage(
-                        imageUrl: danboorupreviw[a],
+                        imageUrl: danboorupreview[a],
                         placeholder: Image.asset('img/aaloading.jpg'),
                         errorWidget: new Icon(Icons.error),
                         // fit: BoxFit.cover,
